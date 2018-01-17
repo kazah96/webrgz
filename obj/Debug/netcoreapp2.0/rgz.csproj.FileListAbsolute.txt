@@ -8,4 +8,3 @@ c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfoI
 c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfo.cs
 c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.dll
 c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.pdb
-C:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.csprojResolveAssemblyReference.cache

@@ -8,18 +8,11 @@ using rgz.Models;
 
 namespace rgz.Controllers
 {
-    
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
             return View();
-        }
-
-        public ViewResult Login()
-        {
-            return View();
-
         }
 
         public IActionResult About()

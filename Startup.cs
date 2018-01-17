@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using rgz.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using rgz.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace rgz
 {
@@ -23,9 +22,6 @@ namespace rgz
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(Configuration["Data:RGZ:connectionString"]));
-            
-            services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
         }
 
@@ -42,15 +38,19 @@ namespace rgz
             }
 
             app.UseStaticFiles();
-            app.UseStatusCodePages();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
-            SeedData.EnsurePopulated(app);
+            }); 
+            using(var db = new BloggingContext())
+            {
+                db.Blogs.Add(new Blog {Url = "dfdgdfgdf"});
+                Console.WriteLine("RecordAdded");
+                
+            }
         }
     }
 }
