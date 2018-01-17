@@ -1,0 +1,11 @@
+c:\source\csharp\NetCoreFolder\asp\rgz\bin\Debug\netcoreapp2.0\rgz.deps.json
+c:\source\csharp\NetCoreFolder\asp\rgz\bin\Debug\netcoreapp2.0\rgz.runtimeconfig.json
+c:\source\csharp\NetCoreFolder\asp\rgz\bin\Debug\netcoreapp2.0\rgz.runtimeconfig.dev.json
+c:\source\csharp\NetCoreFolder\asp\rgz\bin\Debug\netcoreapp2.0\rgz.dll
+c:\source\csharp\NetCoreFolder\asp\rgz\bin\Debug\netcoreapp2.0\rgz.pdb
+c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.csproj.CoreCompileInputs.cache
+c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfoInputs.cache
+c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfo.cs
+c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.dll
+c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.pdb
+C:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.csprojResolveAssemblyReference.cache
