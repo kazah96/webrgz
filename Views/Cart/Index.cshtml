@@ -1,0 +1,33 @@
+@model Cart
+
+<h2>Your cart</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Lines) {
+        <tr>
+            <td class="text-center">@line.Quantity</td>
+            <td class="text-left">@line.Good.Name</td>
+            <td class="text-right">@line.Good.Price.ToString("c")</td>
+            <td class="text-right">
+                @((line.Quantity * line.Good.Price).ToString("c"))
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.ComputeTotalValue().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>

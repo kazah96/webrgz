@@ -5,14 +5,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rgz.Models;
+using Microsoft.EntityFrameworkCore;
+using rgz.Infrastructure;
 
 namespace rgz.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private IRepository repository;
+        public int pageSize = 4;
+        public ViewResult Index(int productPage = 1)
         {
-            return View();
+
+            return View(repository
+            .Goods
+            .OrderBy(p => p.GoodId)
+            .Skip((productPage - 1) * pageSize)
+            .Take(pageSize));
+        }
+        public HomeController(IRepository repo)
+        {
+            repository = repo;
         }
 
         public IActionResult About()

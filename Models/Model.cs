@@ -1,33 +1,58 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-
+using System.Collections;
+using System.Linq;
 namespace rgz.Models
 {
-    public class BloggingContext : DbContext
+    public interface IRepository
     {
-        public DbSet<Blog> Blogs{get;set;}
-        public DbSet<Post> Posts{get;set;}
+        IQueryable<Good> Goods { get; }
+
+    }
+
+    public class DBRep : IRepository
+    {
+        private ShopDB repos;
+        public DBRep(ShopDB context)
+        {
+            repos = context;
+        }
+
+        public IQueryable<Good> Goods => repos.Goods;
+    }
+
+    public class FakeRepository : IRepository
+    {
+        public IQueryable<Good> Goods
+        {
+            get
+            {
+                return new List<Good>{
+                new Good{Name = "Tovvar1", Price=499, Description="dewded rrr"},
+                new Good{Name = "Tovvar2", Price=11, Description="ebalsadas f wef"}}.AsQueryable();
+            }
+        }
+
+    }
+
+    public class ShopDB : DbContext
+    {
+        public DbSet<Good> Goods { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder bd)
         {
-            bd.UseSqlite("Data Source=blogging.db");
+            bd.UseSqlite("Data Source=Shop.db");
         }
     }
 
-    public class Blog
+    public class Good
     {
-        public int BlogId{get;set;}
-        public string Url{get;set;}
-        public List<Post> Post {get;set;}
+        public int GoodId { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public string ImgPath { get; set; }
 
     }
-    public class Post
-    {
-        public int PostId { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public int BlogId { get; set; }
-        public Blog Blog { get; set; }
-    }
-    
+
 }
