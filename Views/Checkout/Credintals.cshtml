@@ -1,0 +1,14 @@
+@model Client
+
+<form asp-action="Success" asp-controller="Checkout">
+    <label>Email</label>
+    <input asp-for="Email" type="email">
+    <br>
+    <label>Имя</label>
+    <input asp-for="Name" type="text">
+    <br>
+    <label>Адрес доставки</label>
+    <input asp-for="Adress" type="text">
+    <br>
+    <input class="btn" type="submit" value="Подтвердить">
+</form>
