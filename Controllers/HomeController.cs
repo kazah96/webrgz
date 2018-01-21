@@ -22,11 +22,7 @@ namespace rgz.Controllers
         public ViewResult Index(int productPage = 1)
         {
 
-            return View(repository
-            .Goods
-            .OrderBy(p => p.GoodId)
-            .Skip((productPage - 1) * pageSize)
-            .Take(pageSize));
+            return View(repository.Goods);
         }
         public HomeController(IRepository repo)
         {

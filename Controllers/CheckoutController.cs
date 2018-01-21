@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using rgz.Models;
 using Microsoft.EntityFrameworkCore;
 using rgz.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace rgz.Controllers
 {
@@ -49,6 +50,7 @@ namespace rgz.Controllers
             return View();
         }
 
+        [Authorize]
         public ViewResult Table()
         {
 

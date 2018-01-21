@@ -1,0 +1,24 @@
+@model AddGoodModel
+
+<form asp-action="EditGood" asp-controller="Admin" method="post">
+        <div asp-validation-summary=" All" class="text-danger"></div>
+  <div class="form-group">
+       <input type="hidden" asp-for="id">
+    <label asp-for="Name">Название</label>
+   
+    <input type="text" class="form-control" asp-for="@Model.Name" value="@Model.Name">
+  </div>
+  <div class="form-group">
+
+    <label>Цена</label>
+    <input class="form-control" value="@Model.Price" asp-for="@Model.Price" type="text">
+</div>
+
+  <div class="form-group">
+    <label>Описание</label>
+    <input class="form-control" value="@Model.Description" asp-for="@Model.Description" type="text">
+</div>
+
+
+  <button type="submit" class="btn btn-primary">Изменить</button>
+</form>

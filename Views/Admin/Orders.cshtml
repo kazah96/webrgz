@@ -1,0 +1,27 @@
+@model List<ClientAndGoods>
+
+<div class="container">
+    <div class="row">
+    <div class="col-md-3">
+        @Html.Partial("AdminMenu")
+    </div>
+    
+
+    <div class="col-md-9">
+    @foreach(var t in @Model)
+    {
+        <h3>@t.Client.Name</h3>
+        @t.Client.Email
+        <br>
+        @foreach (var item in t.Goods)
+        {
+            <h4>@item.Name
+            @t.Client.ClientGood.Where(w=>w.Good == item).FirstOrDefault().Quantity;
+            </h4>
+            <br>
+        }
+        <hr>
+    }
+    </div>
+    </div>
+</div>

@@ -13,6 +13,11 @@ namespace rgz.Models
         void AddClientWithGood(Client client, Cart cart);
         List<ClientAndGoods> GetClientAndGoods();
 
+        void AddGood(Good good);
+
+        void SaveChanges();
+        void DeleteGood(int id);
+
     }
 
     public class DBRep : IRepository
@@ -24,6 +29,21 @@ namespace rgz.Models
             repos.Goods.Load();
         }
         public IQueryable<Good> Goods => repos.Goods;
+
+        public void AddGood(Good good)
+        {
+            repos.Add(good);
+            repos.SaveChanges();
+        }
+        public void SaveChanges()
+        {
+            repos.SaveChanges();
+        }
+        public void DeleteGood(int id)
+        {
+            repos.Remove(repos.Goods.FirstOrDefault(w=>w.GoodId==id));
+            SaveChanges();
+        }
         public IQueryable<Client> Clients
         {
             get

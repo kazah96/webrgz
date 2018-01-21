@@ -28,13 +28,9 @@ namespace rgz
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddAuthorization();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.AddDbContext<ShopDB>();
-            //services.AddDbContext<UserDB>();
             services.AddDbContext<AppIdentityDbContext>();
-
-            services.AddIdentity<IdentityUser,IdentityRole>()
+            services.AddIdentity<AppUser,IdentityRole>()
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddDefaultTokenProviders();
 
@@ -44,7 +40,6 @@ namespace rgz
             services.AddMvc();
             services.AddSession();
             services.AddMemoryCache();
-        
 
         }
 
@@ -61,9 +56,9 @@ namespace rgz
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseAuthentication();
-           // app.UseCookieAuthentication(optioins => optioins);
             app.UseStaticFiles();
+            app.UseAuthentication();
+
             app.UseSession();
                 
             app.UseMvc(routes =>

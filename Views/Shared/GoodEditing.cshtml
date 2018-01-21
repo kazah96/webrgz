@@ -1,0 +1,34 @@
+@model Good
+
+    <div class="card bg-white border-primary " style="margin:5px" >
+        <div class="card-body">
+
+            <h3 class="card-title text-primary">@Model.Name
+                      <small class="badge-pill badge-warning" style="float:right; margin-top:7px" >@Model.Price.ToString("c")</small>
+                      <hr>
+              
+            </h3>
+            <h6 class="card-subtitle">
+                    @Model.Description
+            </h6>
+           <div>
+               
+               <form id="@Model.GoodId" method="post" asp-controller="Admin" asp-action="Delete">
+                   <input type="hidden" asp-for="GoodId" >
+                <button class="btn btn-secondary" style="float:right; margin-left:5px;">
+                    Удалить
+                </button>
+                </form>
+                 <form id="@Model.GoodId" method="post" asp-controller="Admin" asp-action="Edit">
+                   <input type="hidden" asp-for="GoodId" >
+                <button class="btn btn-primary" style="float:right">
+                    Редактировать
+                </button>
+                </form>
+           </div>
+
+        </div>
+    </div>
+  
+
+    

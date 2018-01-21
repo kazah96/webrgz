@@ -4,36 +4,46 @@ using Microsoft.AspNetCore.Identity;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel.DataAnnotations;
 
 namespace rgz.Models
 {
-    public class AppIdentityDbContext : IdentityDbContext<IdentityUser>
+
+    public class LoginModel
     {
+        [Required]
+        [UIHint("Email")]
+        public string Email { get; set; }
+        [Required]
+        [UIHint("Password")]
+        public string Password { get; set; }
+    }
+
+    public class CreateModel
+    {
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
+    }
+
+    public class AppUser : IdentityUser
+    {
+
+    }
+
+    public class AppIdentityDbContext : IdentityDbContext<AppUser>
+    {
+        
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
 
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder opdb)
+        protected override void OnConfiguring(DbContextOptionsBuilder s)
         {
-            opdb.UseSqlite("Data Source = Identity.db");
-        }
-
-    }
-
-    public static class IdentitySeedData
-    {
-        private const string adminUser = "Admin";
-        private const string adminPassword = "Secret";
-        public static async void EnsurePopulated(IApplicationBuilder app)
-        {
-            UserManager<IdentityUser> userManager = app.ApplicationServices
-            .GetRequiredService<UserManager<IdentityUser>>();
-            IdentityUser user = await userManager.FindByIdAsync(adminUser);
-            if (user == null)
-            {
-                user = new IdentityUser("Admin");
-                await userManager.CreateAsync(user, adminPassword);
-            }
+            s.UseSqlite("Data source=Identity.db");
         }
     }
 
