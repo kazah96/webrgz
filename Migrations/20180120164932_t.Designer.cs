@@ -10,9 +10,10 @@ using System;
 namespace rgz.Migrations
 {
     [DbContext(typeof(ShopDB))]
-    partial class ShopDBModelSnapshot : ModelSnapshot
+    [Migration("20180120164932_t")]
+    partial class t
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +43,6 @@ namespace rgz.Migrations
                     b.Property<int>("ClientId");
 
                     b.Property<int>("GoodId");
-
-                    b.Property<int>("Quantity");
 
                     b.HasKey("ClientId", "GoodId");
 

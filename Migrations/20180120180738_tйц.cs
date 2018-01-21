@@ -4,21 +4,22 @@ using System.Collections.Generic;
 
 namespace rgz.Migrations
 {
-    public partial class name : Migration
+    public partial class tйц : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Description",
-                table: "Goods",
-                nullable: true);
+            migrationBuilder.AddColumn<int>(
+                name: "Quantity",
+                table: "ClientGood",
+                nullable: false,
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Description",
-                table: "Goods");
+                name: "Quantity",
+                table: "ClientGood");
         }
     }
 }

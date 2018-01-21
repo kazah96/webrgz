@@ -22,11 +22,7 @@ namespace rgz.Controllers
         {
             return View(GetCart());
         }
-
-        public string Index2()
-        {
-            return "Hello World Cart";
-        }
+        
         public RedirectToActionResult AddToCart(int goodId, string returnUrl)
         {
             Good good = repository.Goods.FirstOrDefault(w => w.GoodId == goodId);
@@ -38,6 +34,13 @@ namespace rgz.Controllers
             }
 
             return RedirectToAction("Index","Home", new { returnUrl });
+        }
+        public RedirectToActionResult RemoveAll()
+        {
+            HttpContext.Session.SetJson("Cart", null);
+            
+            return RedirectToAction("Index","Cart");
+
         }
 
         private Cart GetCart()

@@ -1,9 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using rgz.Models;
+using System;
 
 namespace rgz.Models
 {
+
     public class Cart
     {
         private List<CartLine> lineCollection = new List<CartLine>();

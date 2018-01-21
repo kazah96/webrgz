@@ -32,4 +32,10 @@
     </tfoot>
 </table>
 
-<div class="col-sm-12"><a asp-controller="Checkout" asp-action="Index">Checkout</a></div>
+<form asp-controller="Checkout" asp-action="Index">
+    <button class="btn  btn-primary" style="float:right; margin-left:10px">Купить</button>
+</form>
+
+<form asp-controller="Cart" asp-action="RemoveAll">
+    <button class="btn" style="float:right">Очистить корзину</button>
+</form>

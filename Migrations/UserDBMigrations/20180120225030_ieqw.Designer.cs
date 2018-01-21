@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using rgz.Models;
 using System;
 
-namespace rgz.Migrations
+namespace rgz.Migrations.UserDBMigrations
 {
-    [DbContext(typeof(ShopDB))]
-    [Migration("20180117181930_rw")]
-    partial class rw
+    [DbContext(typeof(UserDB))]
+    [Migration("20180120225030_ieqw")]
+    partial class ieqw
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,20 +19,20 @@ namespace rgz.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("rgz.Models.Good", b =>
+            modelBuilder.Entity("rgz.Models.User", b =>
                 {
-                    b.Property<int>("GoodId")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ImgPath");
+                    b.Property<int>("AccessLevel");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Login");
 
-                    b.Property<decimal>("Price");
+                    b.Property<string>("Password");
 
-                    b.HasKey("GoodId");
+                    b.HasKey("UserId");
 
-                    b.ToTable("Goods");
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

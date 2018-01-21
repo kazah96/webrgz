@@ -8,12 +8,17 @@ using rgz.Models;
 using Microsoft.EntityFrameworkCore;
 using rgz.Infrastructure;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace rgz.Controllers
 {
+    
     public class HomeController : Controller
     {
         private IRepository repository;
         public int pageSize = 4;
+
+      ///  [Authorize]
         public ViewResult Index(int productPage = 1)
         {
 

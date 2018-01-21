@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Microsoft.AspNetCore.Identity;
+
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace rgz
 {
     public class Startup
@@ -24,11 +28,24 @@ namespace rgz
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddAuthorization();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.AddDbContext<ShopDB>();
+            //services.AddDbContext<UserDB>();
+            services.AddDbContext<AppIdentityDbContext>();
+
+            services.AddIdentity<IdentityUser,IdentityRole>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddDefaultTokenProviders();
+
             services.AddTransient<IRepository, DBRep>();
+            //  services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            // .AddCookie();
             services.AddMvc();
             services.AddSession();
             services.AddMemoryCache();
+        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,9 +61,11 @@ namespace rgz
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseAuthentication();
+           // app.UseCookieAuthentication(optioins => optioins);
             app.UseStaticFiles();
             app.UseSession();
-
+                
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

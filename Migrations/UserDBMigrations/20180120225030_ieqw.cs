@@ -2,32 +2,32 @@
 using System;
 using System.Collections.Generic;
 
-namespace rgz.Migrations
+namespace rgz.Migrations.UserDBMigrations
 {
-    public partial class rw : Migration
+    public partial class ieqw : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Goods",
+                name: "Users",
                 columns: table => new
                 {
-                    GoodId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ImgPath = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false)
+                    AccessLevel = table.Column<int>(nullable: false),
+                    Login = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Goods", x => x.GoodId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Goods");
+                name: "Users");
         }
     }
 }
