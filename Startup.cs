@@ -33,7 +33,7 @@ namespace rgz
             services.AddIdentity<AppUser,IdentityRole>()
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddDefaultTokenProviders();
-
+    services.AddScoped<ICartService,CartService>();
             services.AddTransient<IRepository, DBRep>();
             //  services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             // .AddCookie();

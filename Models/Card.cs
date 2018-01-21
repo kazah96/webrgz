@@ -1,13 +1,49 @@
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using rgz.Models;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using rgz.Models;
+using Microsoft.EntityFrameworkCore;
+using rgz.Infrastructure;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace rgz.Models
 {
+
+    public interface ICartService
+    {
+        int GetCount();
+    }
+
+    public class FakeCartService : ICartService
+    {
+        public int GetCount()
+        {
+            return 10;
+        }
+    }
+
+    public class CartService : ICartService
+    {  
+        private static IServiceProvider provider;
+        public CartService(IServiceProvider pr)
+        {
+            provider = pr;
+        }
+
+        public int GetCount()
+        {
+            ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            Cart c = session.GetJson<Cart>("Cart");
+            if(c == null)
+                return 0;
+            return c.Lines.Count();
+        }
+        
+    }
 
     public class Cart
     {

@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
+@inject ICartService cart
 
 <!DOCTYPE html>
 
@@ -16,30 +17,40 @@
 </head>
 <body>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Магазик</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav align-items-end">
       <li class="nav-item active">
         <a class="nav-link" asp-controller="Home" asp-action="Index">Главная <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
+      
     
       
       </li>
       <li class="nav-item">
         <a class="nav-link" asp-controller="Admin" asp-action="Index">Управление</a>
       </li>
-      <li class="nav-item">
-          <a asp-controller="cart" class="nav-link" style="float:right" asp-action="index">Корзина</a>
-      </li>
-
-
+      <li class="nav-item justify-content-end">
+          <a asp-controller="cart" class="nav-link" asp-action="index">🛒
+            @{
+            int w = cart.GetCount();
+            }
+            @if(w == 0) 
+            {
+            <span class="badge badge-dark">0</span>
+            }
+            else
+            {
+            <span class="badge badge-danger">@w</span>
+            }
+          </a>
+    
+      </li> 
+      
     </ul>
    
   </div>
