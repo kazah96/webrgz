@@ -24,7 +24,13 @@
 
   <div class="form-group">
     <label>Описание</label>
-    <input class="form-control" value="@Model.Description" asp-for="@Model.Description" type="text">
+    <textarea class="form-control" style="min-height:300px" asp-for="@Model.Description" type="text">
+      @Model.Description
+    </textarea>
+</div>
+  <div class="form-group">
+    <label>Путь к картине</label>
+    <input class="form-control" value="@Model.ImgPath" asp-for="@Model.ImgPath" type="file">
 </div>
 
 

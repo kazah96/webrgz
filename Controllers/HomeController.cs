@@ -22,7 +22,7 @@ namespace rgz.Controllers
         public ViewResult Index(int productPage = 1)
         {
 
-            return View(repository.Goods);
+            return View(repository.Goods.ToList());
         }
         public HomeController(IRepository repo)
         {

@@ -123,11 +123,11 @@ namespace rgz.Models
             ClientGood = new List<ClientGood>();
         }
         public int ClientId { get; set; }
-        [Required(ErrorMessage = "Poli dolzhno ustanovleno")]
+        [Required(ErrorMessage = "Введите Email")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Poli dolzhno ustanovleno")]
+        [Required(ErrorMessage = "Введите имя")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Poli dolzhno ustanovleno")]
+        [Required(ErrorMessage = "Веведите адрес")]
         public string Adress { get; set; }
         public virtual ICollection<ClientGood> ClientGood { get; set; }
 

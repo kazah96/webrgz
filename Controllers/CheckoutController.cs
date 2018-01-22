@@ -32,11 +32,16 @@ namespace rgz.Controllers
         [HttpPost]
         public ViewResult Credintals(Client client)
         {
-            cart = HttpContext.Session.GetJson<Cart>("Cart");
-            repository.AddClientWithGood(client, cart);
-            HttpContext.Session.SetJson("Cart", null);
+            if(ModelState.IsValid)
+            {
+                cart = HttpContext.Session.GetJson<Cart>("Cart");
+                repository.AddClientWithGood(client, cart);
+                HttpContext.Session.SetJson("Cart", null);
 
-            return View("Success", client);
+                return View("Success", client);
+            }
+            return View();
+
         }
 
         [HttpGet]

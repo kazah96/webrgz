@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.RegularExpressions;
 
 namespace rgz.Models
 {
@@ -73,6 +74,7 @@ namespace rgz.Models
             mdl.Description = good.Description;
             mdl.Name = good.Name;
             mdl.Price = good.Price;
+            mdl.ImgPath = good.ImgPath;
             mdl.id = good.GoodId;
 
             return View(mdl);
@@ -80,13 +82,16 @@ namespace rgz.Models
 
         public IActionResult EditGood(AddGoodModel addGood)
         {
-
             if (ModelState.IsValid)
             {
+                
                 var r = repository.Goods.FirstOrDefault(w => w.GoodId == addGood.id);
                 r.Description = addGood.Description;
                 r.Name = addGood.Name;
                 r.Price = addGood.Price;
+
+                r.ImgPath= "/img/"+addGood.ImgPath;
+
                 repository.SaveChanges();
                 return Redirect("/Admin/Goods");
             }

@@ -16,33 +16,52 @@ namespace rgz.Models
     public interface ICartService
     {
         int GetCount();
+        bool IsInCart(Good good);
+        int GetCount(Good good);
     }
 
-    public class FakeCartService : ICartService
-    {
-        public int GetCount()
-        {
-            return 10;
-        }
-    }
 
     public class CartService : ICartService
-    {  
+    {
+        private Cart c;
         private static IServiceProvider provider;
         public CartService(IServiceProvider pr)
         {
             provider = pr;
+            ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            c = session.GetJson<Cart>("Cart");
+
+        }
+        public int GetCount(Good good)
+        {
+            if(c != null && good != null)
+            {
+                return  c.Lines.FirstOrDefault(w=>w.Good.GoodId==good.GoodId).Quantity;
+            }
+            return 0;
         }
 
         public int GetCount()
         {
-            ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-            Cart c = session.GetJson<Cart>("Cart");
-            if(c == null)
+
+
+            if (c == null)
                 return 0;
             return c.Lines.Count();
         }
-        
+
+        public bool IsInCart(Good good)
+        {
+
+            if (good != null && c != null)
+            {
+                bool qw = c.Lines.Any(w => w.Good.GoodId == good.GoodId);
+                return qw;
+            }
+
+            return false;
+        }
+
     }
 
     public class Cart
@@ -72,7 +91,7 @@ namespace rgz.Models
         }
         public virtual decimal ComputeTotalValue()
         {
-            return lineCollection.Sum(e=>e.Good.Price*e.Quantity);
+            return lineCollection.Sum(e => e.Good.Price * e.Quantity);
         }
         public virtual void Clear()
         {
