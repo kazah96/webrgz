@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System;
 namespace rgz.Models
 {
     public interface IRepository
@@ -115,6 +116,7 @@ namespace rgz.Models
         public int GoodId { get; set; }
         public Good Good { get; set; }
         public int Quantity{get;set;}
+      
 
     }   
 
