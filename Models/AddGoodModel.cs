@@ -10,6 +10,10 @@ namespace rgz.Models
         public decimal Price{get;set;}
         [Required]
         public string Description{get;set;}
+        [Required]
+        public string Street{get;set;}
+        [Required]
+        public string StreetNumber{get;set;}
         public string ImgPath{get;set;}
 
     }

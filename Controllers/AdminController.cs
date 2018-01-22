@@ -74,6 +74,8 @@ namespace rgz.Models
             mdl.Description = good.Description;
             mdl.Name = good.Name;
             mdl.Price = good.Price;
+            mdl.Street = good.Adress;
+            mdl.StreetNumber = good.StreetNumber;
             mdl.ImgPath = good.ImgPath;
             mdl.id = good.GoodId;
 
@@ -84,14 +86,17 @@ namespace rgz.Models
         {
             if (ModelState.IsValid)
             {
-                
+
                 var r = repository.Goods.FirstOrDefault(w => w.GoodId == addGood.id);
                 r.Description = addGood.Description;
                 r.Name = addGood.Name;
                 r.Price = addGood.Price;
-
-                r.ImgPath= "/img/"+addGood.ImgPath;
-
+                r.Adress = addGood.Street;
+                r.StreetNumber = addGood.StreetNumber;
+                if (addGood.ImgPath != null)
+                {
+                    r.ImgPath = "/img/" + addGood.ImgPath;
+                }
                 repository.SaveChanges();
                 return Redirect("/Admin/Goods");
             }

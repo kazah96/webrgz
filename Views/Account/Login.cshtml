@@ -1,6 +1,9 @@
 @model LoginModel
 
     <form asp-action="Login" asp-controller="Account" method="post">
+     
+     
+ <div asp-validation-summary="All" style="margin: 5px"></div>
   <div class="form-group">
     <label asp-for="Email">Email</label>
     <input type="text" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Enter Email">

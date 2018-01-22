@@ -19,10 +19,19 @@ namespace rgz.Controllers
         public int pageSize = 4;
 
       ///  [Authorize]
-        public ViewResult Index(int productPage = 1)
-        {
 
-            return View(repository.Goods.ToList());
+        [HttpGet]
+        public ViewResult Index(string street)
+        {
+            List<Good> w;
+            if(street != null)
+            {
+                w = repository.Goods.Where(y=>y.Adress == street).ToList();
+            }
+            else
+                w = repository.Goods.ToList();
+
+            return View(w);
         }
         public HomeController(IRepository repo)
         {

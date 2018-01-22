@@ -1,10 +1,9 @@
 @model Good
 @inject ICartService cart
 
-   
     
-    <div class="card border-primary" style="margin:5px">
-        <div class="bkg" style="background-image:url(@Model.ImgPath)">
+    <div class="card  border-primary crr" style="margin:5px">
+        <div class="bkg" name="w" style="background-image:url(@Model.ImgPath)">
 
         </div>
         <div class="card-body">     
@@ -18,6 +17,10 @@
             <p class="card-text  text-dark">
                     @Model.Description
             </p>         
+            <h4>
+                <small class="badge badge-info" style="margin-top:7px" >@Model.Adress @Model.StreetNumber</small>
+               
+            </h4>      
 
         </div>
          <div class="card-footer">

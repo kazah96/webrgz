@@ -29,6 +29,16 @@
     </textarea>
 </div>
   <div class="form-group">
+    <label>Название улицы</label>
+    <input class="form-control" placeholder="Введите улицу" asp-for="Street" type="text">
+</div>
+  <div class="form-group">
+    <label>Номер улицы</label>
+    <input class="form-control" placeholder="Введите номер улицы" asp-for="StreetNumber" type="text">
+</div>
+
+
+  <div class="form-group">
     <label>Путь к картине</label>
     <input class="form-control" value="@Model.ImgPath" asp-for="@Model.ImgPath" type="file">
 </div>

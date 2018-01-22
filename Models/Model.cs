@@ -102,7 +102,9 @@ namespace rgz.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
+        public string Adress { get; set; }  
         public string ImgPath { get; set; }
+        public string StreetNumber{get;set;}
         public ICollection<ClientGood> ClientGood { get; set; }
 
     }

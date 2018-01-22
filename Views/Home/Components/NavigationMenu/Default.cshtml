@@ -1,0 +1,15 @@
+@model IQueryable<string>
+
+      <ul class="nav flex-column">
+                  
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-controller="Home" asp-action="Index">Все</a>
+                    </li>
+
+                    @foreach(var q in Model)
+                    {
+                      
+                        <li class="nav-item">
+                        <a class="nav-link active" asp-route-street="@q" asp-controller="Home" asp-action="Index">@q</a>
+                        </li>
+                    }
