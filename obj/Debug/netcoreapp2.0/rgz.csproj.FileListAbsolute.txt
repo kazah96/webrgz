@@ -8,13 +8,3 @@ c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfoI
 c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfo.cs
 c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.dll
 c:\source\csharp\NetCoreFolder\asp\rgz\obj\Debug\netcoreapp2.0\rgz.pdb
-c:\Users\Advocad\Documents\pokersource\webrgz\bin\Debug\netcoreapp2.0\rgz.deps.json
-c:\Users\Advocad\Documents\pokersource\webrgz\bin\Debug\netcoreapp2.0\rgz.runtimeconfig.json
-c:\Users\Advocad\Documents\pokersource\webrgz\bin\Debug\netcoreapp2.0\rgz.runtimeconfig.dev.json
-c:\Users\Advocad\Documents\pokersource\webrgz\bin\Debug\netcoreapp2.0\rgz.dll
-c:\Users\Advocad\Documents\pokersource\webrgz\bin\Debug\netcoreapp2.0\rgz.pdb
-c:\Users\Advocad\Documents\pokersource\webrgz\obj\Debug\netcoreapp2.0\rgz.csproj.CoreCompileInputs.cache
-c:\Users\Advocad\Documents\pokersource\webrgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfoInputs.cache
-c:\Users\Advocad\Documents\pokersource\webrgz\obj\Debug\netcoreapp2.0\rgz.AssemblyInfo.cs
-c:\Users\Advocad\Documents\pokersource\webrgz\obj\Debug\netcoreapp2.0\rgz.dll
-c:\Users\Advocad\Documents\pokersource\webrgz\obj\Debug\netcoreapp2.0\rgz.pdb
