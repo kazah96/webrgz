@@ -3,11 +3,11 @@
 
 
 
-    
-    <div class="card  border-primary crr" style="margin:5px" name="aa">
-        <div class="bkg" id="card" name="w" style="background-image:url(@Model.ImgPath)">
 
-        </div>
+    <div class="card  border-primary crr" style="margin:5px" name="aa">
+        <div><a asp-controller="Home" asp-route-id="@Model.GoodId" asp-action="ViewGood"> <div class="bkg" id="card" name="w" style="background-image:url(@Model.ImgPath)"></div>   
+
+        </a></div>
         <div class="card-body">     
             
             <h4 class="card-title text-primary">@Model.Name
@@ -46,6 +46,3 @@
                 </form>
                 </div>
     </div>
-
-   
-    

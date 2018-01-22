@@ -1,6 +1,9 @@
 @model Cart
 
-<h2>Корзина</h2>
+
+<div class="container">
+<div class="col-md-12">
+    <h2>Корзина</h2>
 <table class="table table-bordered table-striped col-md-12" >
     <thead>
         <tr>
@@ -39,3 +42,5 @@
 <form asp-controller="Cart" asp-action="RemoveAll">
     <button class="btn" style="float:right">Очистить корзину</button>
 </form>
+</div>
+</div>

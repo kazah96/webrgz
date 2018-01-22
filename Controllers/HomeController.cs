@@ -45,6 +45,13 @@ namespace rgz.Controllers
             return View();
         }
 
+        public IActionResult ViewGood(int id)
+        {
+
+           return View(repository.Goods.FirstOrDefault(e=>e.GoodId==id));
+        }
+
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
