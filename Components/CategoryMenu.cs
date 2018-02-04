@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using rgz.Models;
 using System.Linq;
+
 namespace SportsStore.Components
 {
     public class NavigationMenuViewComponent : ViewComponent

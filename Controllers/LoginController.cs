@@ -15,15 +15,31 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace rgz.Controllers
 {
+
+    public interface ISigned
+    {
+        bool IsAdmin { get;}
+    }
+
+    public class IsAdm : ISigned
+    {
+       public bool IsAdmin{get=>true;}
+    }
     public class AccountController : Controller
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
 
-        public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signIn)
+        private ISigned isAdmin;
+
+    
+        public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signIn, ISigned f)
         {
+            isAdmin = f;
+
             userManager = userMgr;
             signInManager = signIn;
+
         }
 
         public ViewResult Create()
@@ -33,7 +49,7 @@ namespace rgz.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateModel mdl)
         {
-            
+
             if (ModelState.IsValid)
             {
                 AppUser usr = new AppUser
@@ -43,18 +59,18 @@ namespace rgz.Controllers
                 };
 
                 IdentityResult result = await userManager.CreateAsync(usr, mdl.Password);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    foreach(IdentityError Error in result.Errors)
+                    foreach (IdentityError Error in result.Errors)
                     {
-                        ModelState.AddModelError("",Error.Description);
+                        ModelState.AddModelError("", Error.Description);
                     }
                 }
-                
+
             }
             return View(mdl);
         }
@@ -72,7 +88,10 @@ namespace rgz.Controllers
                 {
                     await signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, details.Password, false, false);
-                    if (result.Succeeded) return Redirect(returnUrl ?? "/Admin/Index");
+                    if (result.Succeeded)
+                    {
+                        return Redirect(returnUrl ?? "/Admin/Index");
+                    }
                 }
                 ModelState.AddModelError(nameof(LoginModel.Email), "invalid user or password");
             }
@@ -83,7 +102,9 @@ namespace rgz.Controllers
 
         public async Task<IActionResult> Logout(string returnUrl)
         {
+
             await signInManager.SignOutAsync();
+            
             return Redirect("/Home/Index");
         }
 

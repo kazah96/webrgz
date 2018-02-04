@@ -11,7 +11,7 @@ using rgz.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 
 namespace rgz.Controllers
-{
+{   
     
     public class HomeController : Controller
     {
@@ -45,13 +45,34 @@ namespace rgz.Controllers
             return View();
         }
 
+        public List<Comment> Yoba(int id)
+        {
+            var w = repository.GetComments(id); 
+            return w;
+        }
+
+        public IActionResult DeleteComment(int id)
+        {
+            repository.DeleteComment(id);
+            return RedirectToAction("Home");
+        }
         public IActionResult ViewGood(int id)
         {
 
-           return View(repository.Goods.FirstOrDefault(e=>e.GoodId==id));
+           return View(new ViewGood{Good = repository.Goods.FirstOrDefault(e=>e.GoodId==id),
+            Comments=repository.GetComments(id)});
         }
 
+        [HttpGet]
+        public IActionResult AddComment(int id, string author, string text,string date)
+        {
 
+            repository.AddComment(text,author,id,date);
+
+            Console.WriteLine("eeeba");
+
+            return RedirectToAction("ViewGood", new {id = id});
+        }
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

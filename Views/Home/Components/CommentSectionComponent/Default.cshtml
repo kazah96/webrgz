@@ -1,0 +1,24 @@
+<div class="card bg-info">
+    <h2 class="card-text" id="pizda">Пиздаа</h2>
+    <button type="button" class="btn btn-danger" onclick="loadFunc()">Еба</button>
+</div>
+
+<script>
+    function loadFunc()
+    {
+        var w = document.getElementById("pizda");
+        w.innerText = "dsfsdf";
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("pizda").innerHTML = this.responseText;
+        }
+    };
+  
+  xhttp.open("GET", @Url.Action("asdsa","Dasda"), true);
+  xhttp.send();
+
+    }
+
+</script>

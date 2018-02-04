@@ -1,0 +1,36 @@
+@model List<Comment>
+
+<div style="padding:10px" >
+@foreach(var t in Model)
+{
+    <div class="card border-info" style="margin-top:5px; margin-bottom:5px;">
+    <div class="card-header">
+    <h5 class="card-title">
+    @t.Author 
+    <h6 class="card-subtitle mb-2 text-muted">
+    @t.Date.ToString("g")
+    
+    </h6>
+    </div>
+    <div class="card-body">
+     <p class="card-text">@t.Text</p>
+    </div>
+    </div>
+   
+}
+<div style="margin:10px">
+<h5> Добавить коммент</h5>
+<form asp-controller="Home" asp-action="AddComment" >
+        <label for="exampleFormControlInput1">Имя</label>
+    <div class="form-group border-primary">
+        <input type="text" class="form-control">
+        <label for="exampleFormControlInput1">Сообщение</label>
+       
+  <textarea class="form-control" aria-label="With textarea"></textarea>
+  <button type="submit" class="btn btn-primary" style="margin: 5px; float:right;">Отправить</button>  
+    </form>
+     
+    </div>
+
+</div>
+<hr>

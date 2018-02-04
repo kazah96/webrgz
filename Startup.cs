@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using rgz.Controllers;
 using Microsoft.AspNetCore.Identity;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -27,7 +27,7 @@ namespace rgz
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddDbContext<ShopDB>();
             services.AddDbContext<AppIdentityDbContext>();
             services.AddIdentity<AppUser,IdentityRole>()
@@ -35,6 +35,7 @@ namespace rgz
             .AddDefaultTokenProviders();
     services.AddScoped<ICartService,CartService>();
             services.AddTransient<IRepository, DBRep>();
+            services.AddSingleton<ISigned, IsAdm>();
             //  services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             // .AddCookie();
             services.AddMvc();

@@ -4,6 +4,8 @@ using System.Collections;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System;
+using Newtonsoft.Json;
+
 namespace rgz.Models
 {
     public interface IRepository
@@ -15,6 +17,10 @@ namespace rgz.Models
         List<ClientAndGoods> GetClientAndGoods();
 
         void AddGood(Good good);
+        void AddComment(string text, string author, int goodId, string date);
+        List<Comment> GetComments(int goodId);
+
+        void DeleteComment(int id);
 
         void SaveChanges();
         void DeleteGood(int id);
@@ -31,6 +37,28 @@ namespace rgz.Models
         }
         public IQueryable<Good> Goods => repos.Goods;
 
+        public void AddComment(string text, string author, int goodId, string date)
+        {
+            DateTime m = DateTime.Parse(date);
+            
+            // DateTime m = DateTime.Parse(date
+            // ,"yyyy-MM-dd HH:mm:ss"
+            // , System.Globalization.CultureInfo.InvariantCulture);
+
+
+            repos.Comments.Add(new Comment{Text=text, Author=author,GoodId=goodId, Date=m});
+            repos.SaveChanges();
+        }
+        public void DeleteComment(int id)
+        {
+            repos.Comments.Remove(repos.Comments.FirstOrDefault(x=>x.CommentId == id));
+            repos.SaveChanges();
+        }
+        public List<Comment> GetComments(int goodId)
+        {
+            return repos.Comments.Where(w=>w.GoodId==goodId).ToList();
+        }
+
         public void AddGood(Good good)
         {
             repos.Add(good);
@@ -42,7 +70,7 @@ namespace rgz.Models
         }
         public void DeleteGood(int id)
         {
-            repos.Remove(repos.Goods.FirstOrDefault(w=>w.GoodId==id));
+            repos.Remove(repos.Goods.FirstOrDefault(w => w.GoodId == id));
             SaveChanges();
         }
         public IQueryable<Client> Clients
@@ -56,11 +84,11 @@ namespace rgz.Models
         }
         public void AddClientWithGood(Client client, Cart cart)
         {
-            
+
             foreach (var t in cart.Lines)
             {
-                
-                repos.Add(new ClientGood { Client = client, Good = t.Good, Quantity = t.Quantity});
+
+                repos.Add(new ClientGood { Client = client, Good = t.Good, Quantity = t.Quantity });
             }
             repos.SaveChanges();
         }
@@ -75,14 +103,14 @@ namespace rgz.Models
             {
 
                 System.Console.WriteLine(t.Name);
-                var hh = new ClientAndGoods{Client=t};
+                var hh = new ClientAndGoods { Client = t };
                 hh.Goods = new List<Good>();
 
                 foreach (var i in t.ClientGood)
                 {
                     hh.Goods.Add(i.Good);
                     System.Console.WriteLine(i.Good.Name);
-                    
+
                 }
                 r.Add(hh);
             }
@@ -103,10 +131,11 @@ namespace rgz.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
-        public string Adress { get; set; }  
+        public string Adress { get; set; }
         public string ImgPath { get; set; }
-        public string StreetNumber{get;set;}
+        public string StreetNumber { get; set; }
         public ICollection<ClientGood> ClientGood { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
     }
     public class ClientGood
@@ -115,10 +144,10 @@ namespace rgz.Models
         public Client Client { get; set; }
         public int GoodId { get; set; }
         public Good Good { get; set; }
-        public int Quantity{get;set;}
-      
+        public int Quantity { get; set; }
 
-    }   
+
+    }
 
     public class Client
     {
@@ -140,32 +169,33 @@ namespace rgz.Models
     public class ClientAndGoods
     {
         public Client Client;
-        public List<Good> Goods;    
+        public List<Good> Goods;
     }
 
     public class UserDB : DbContext
     {
-        public DbSet<User> Users {get;set;}
+        public DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder opdb)
         {
             opdb.UseSqlite("Data Source = Users.db");
         }
-        
+
     }
 
     public class User
     {
-        public int UserId{get;set;}
-        public string Login{get;set;}
-        public string Password{get;set;}
-        public int AccessLevel{get;set;}
-        
+        public int UserId { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public int AccessLevel { get; set; }
+
     }
 
     public class ShopDB : DbContext
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<Good> Goods { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder opdb)
         {
@@ -181,7 +211,18 @@ namespace rgz.Models
 
     public class Login
     {
-        public string User{get;set;}
-        public string Password{get;set;}
+        public string User { get; set; }
+        public string Password { get; set; }
+    }
+    public class Comment
+    {
+            public int CommentId { get; set; }
+        public string Text { get; set; }
+        public string Author { get; set; }
+        public DateTime Date { get; set; }
+
+        public int GoodId { get; set; }
+        [JsonIgnore]
+        public Good Good { get; set; }
     }
 }

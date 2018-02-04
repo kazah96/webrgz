@@ -1,12 +1,179 @@
-@model Good
+@model ViewGood
+@inject ISigned aa
 
-<div class="container">
+
+<div id="blya" class="container">
 <div class="col-md-12">
 <a href="/"><button class="btn btn-primary" style="margin:5px">
     Назад</button> </a>
 
 <div class="card">
-@Html.Partial("ProductSummary", Model)
+@Html.Partial("ProductSummary", Model.Good)
+
+
+<div style="padding:10px" >
+    <div id="comments">
+
+    <!-- <div class="card border-info" style="margin-top:5px; margin-bottom:5px;">
+    <div class="card-header">
+    <h5 class="card-title">
+    
+    <h6 class="card-subtitle mb-2 text-muted">
+       
+    </h6>
+    </div>
+    <div class="card-body">
+     <p class="card-text"></p>
+    </div>
+    </div> -->
+
+    </div>
+
+
+
+<div style="margin:10px">
+<h5> Добавить коммент</h5>
+<form asp-controller="Home" asp-action="AddComment">
+        <label for="exampleFormControlInput1">Имя</label>
+    <div class="form-group border-primary">
+        <input type="hidden" asp-for=@Model.Good>
+        <input id="author" type="text" class="form-control">
+        <label id="pizda    " for="exampleFormControlInput1">Сообщение</label>
+       
+  <textarea class="form-control" id="text" aria-label="With textarea"></textarea>
+   
+    </form>
+     <button type="button" class="btn btn-primary" id="send" style="margin: 5px; float:right;">Отправить</button> 
+    </div>
+
+</div>
+<hr>
+
+
+
 </div>    
 </div>
+
+
 </div>
+
+
+<br>
+<br>
+<br>
+
+
+
+<script>  
+
+
+    $("#send").click(function() 
+    {
+        var author = $("#author").val();
+        var text = $("#text").val();
+        var id = $("#id").val();
+
+
+        console.log("asdsa");
+
+        var jsDate = new Date();
+        var w = 
+         jsDate.getFullYear() + "-"
+         + jsDate.getMonth()+1 + "-"
+         + jsDate.getDate() + " " 
+         + jsDate.getHours() + ":"
+         + jsDate.getMinutes() + ":"
+         + jsDate.getSeconds();
+         
+        $.get('@Url.Action("AddComment", "Home")', 
+        {"id":@Model.Good.GoodId, "text":text, "author":author, "date":w});
+        
+        $("text").empty();
+        $("author").empty();
+
+       
+        var t = AddComment(author,null,text,
+         w, );
+        
+        
+
+    });
+
+
+
+    function AddComment(author,date,text,date,id)
+    {
+        var qw = "";
+      
+        @{
+            int f = 0;
+        }
+        @if(aa.IsAdmin == true)
+        {
+            f = 1;
+        }
+        if(@f == 1)
+        {
+            qw="<button type='button' id='"  
+            + id + "' style='float:right' class='btn btn-danger' name='delete'>Удалить</button>";
+        }
+        
+        
+
+        var w = $("#comments").append("<div class='card border-info' id=" + id + " style='margin-top:5px'; margin-bottom:5px;'>"
+   +" <div class='card-header'>"
+       + qw 
+    +" <h5 class='card-title'>" + author + "</h5>"
+    
+    
+    + "<h6 class='card-subtitle mb-2 text-muted'>" + date
+       
+    +"</h6>"
+   +" </div>"
+   + "<div class='card-body'>"
+   + " <p class='card-text'>" + text + "</p>"
+   +" </div>"
+   +" </div>");
+    return w;
+
+    }
+
+    function reloadComments() {  
+        $("#comments").empty();
+        $.ajax({  
+            type: "GET",  
+            url: "/home/Yoba/@Model.Good.GoodId",  
+            contentType: "application/json; charset=utf-8",  
+            dataType: "json",  
+            success: function (data) {  
+
+                var DIV = '';  
+                $.each(data, function(key,val)
+                {
+                   AddComment(val.author,val.date,val.text,val.date,val.commentId);
+                    
+                });
+                console.log(data);  
+            }, //End of AJAX Success function  
+  
+            failure: function (data) {  
+                alert(data.responseText);  
+            }, //End of AJAX failure function  
+            error: function (data) {  
+                alert(data.responseText);  
+            } //End of AJAX error function  
+  
+        });         
+    }
+
+    $(document).ready(reloadComments);
+
+    
+    $("delete").click(function()
+    {
+        console.log("ebala");
+        $.get('@Url.Action("DeleteComment", "Home")'), {"id":$.attr("id")};
+    })    ;
+
+
+</script>
